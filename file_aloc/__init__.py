@@ -75,7 +75,7 @@ class ImportALOC(bpy.types.Operator, ImportHelper):
 
     bl_idname = "import_collision.aloc"
     bl_label = "Import Collision ALOC"
-    filename_ext = ".aloc"
+    filename_ext = ".ALOC"
 
     filter_glob: StringProperty(
         default="*.aloc",
@@ -88,7 +88,7 @@ class ImportALOC(bpy.types.Operator, ImportHelper):
     )
 
     def draw(self, context):
-        if ".aloc" not in self.filepath.lower():
+        if ".ALOC" not in self.filepath.upper():
             return
 
         layout = self.layout
@@ -127,8 +127,8 @@ class ExportALOC(bpy.types.Operator, ExportHelper):
     bl_parent_id = "FILE_PT_operator"
     bl_options = {"PRESET"}
     check_extension = True
-    filename_ext = ".aloc"
-    filter_glob: StringProperty(default="*.aloc", options={"HIDDEN"})
+    filename_ext = ".ALOC"
+    filter_glob: StringProperty(default="*.ALOC", options={"HIDDEN"})
 
     def get_collections(self, context):
         items = [(col.name, col.name, "") for col in bpy.data.collections]
@@ -156,7 +156,7 @@ class ExportALOC(bpy.types.Operator, ExportHelper):
     )
 
     def draw(self, context):
-        if ".aloc" not in self.filepath.lower():
+        if ".ALOC" not in self.filepath.upper():
             return
         layout = self.layout
         layout.label(text="Export options:")

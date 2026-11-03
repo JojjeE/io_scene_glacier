@@ -41,7 +41,7 @@ The addon supports the following formats:
 ## Credits
 
  * [PawREP](https://github.com/pawREP)
-   * For making the original `.prim` editing tool known as PrimIO that was used as a reference.
+   * For making the original `.PRIM` editing tool known as PrimIO that was used as a reference.
 
 
  * [Khronos Group](https://github.com/KhronosGroup)

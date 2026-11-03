@@ -186,7 +186,7 @@ def save_prim(
 
         if export_scene:
             prim_export_path = (
-                export_dir + os.sep.encode() + prim_ioi_hash.encode() + b".prim"
+                export_dir + os.sep.encode() + prim_ioi_hash.encode() + b".PRIM"
             )
         else:
             prim_export_path = os.fsencode(filepath)
@@ -266,7 +266,7 @@ def save_prim(
                         write_aloc = True
                 if write_aloc:
                     aloc.write(
-                        export_dir + os.sep.encode() + aloc_ioi_hash.encode() + b".aloc"
+                        export_dir + os.sep.encode() + aloc_ioi_hash.encode() + b".ALOC"
                     )
 
             if not write_aloc:

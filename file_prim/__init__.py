@@ -38,10 +38,10 @@ class ImportPRIM(bpy.types.Operator, ImportHelper):
 
     bl_idname = "import_mesh.prim"
     bl_label = "Import PRIM Mesh"
-    filename_ext = ".prim"
+    filename_ext = ".PRIM"
 
     filter_glob: StringProperty(
-        default="*.prim",
+        default="*.PRIM",
         options={"HIDDEN"},
     )
 
@@ -69,7 +69,7 @@ class ImportPRIM(bpy.types.Operator, ImportHelper):
     )
 
     def draw(self, context):
-        if ".prim" not in self.filepath.lower():
+        if ".PRIM" not in self.filepath.upper():
             return
 
         layout = self.layout
@@ -163,7 +163,7 @@ class ExportPRIM(bpy.types.Operator, ExportHelper):
     bl_parent_id = "FILE_PT_operator"
     bl_options = {"PRESET"}
     check_extension = True
-    filename_ext = ".prim"
+    filename_ext = ".PRIM"
     filter_glob: StringProperty(default="*.prim", options={"HIDDEN"})
 
     def get_collections(self, context):
@@ -228,7 +228,7 @@ class ExportPRIM(bpy.types.Operator, ExportHelper):
     )
 
     def draw(self, context):
-        if ".prim" not in self.filepath.lower():
+        if ".PRIM" not in self.filepath.upper():
             return
 
         layout = self.layout
