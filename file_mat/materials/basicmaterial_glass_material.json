@@ -1,0 +1,35 @@
+{
+	"factory": "",
+	"blueprint": "",
+	"material": "",
+	"overrides": {
+		"Texture2D_03": {
+			"type": "texture",
+			"value": "[assembly:/_pro/environment/textures/constants/color_white.texture?/diffuse_a.tex](ascolormap).pc_tex"
+		},
+		"Texture2DCompoundNormal_01": {
+			"type": "texture",
+			"value": "[assembly:/_pro/environment/textures/detailmaps/smudge/detailmaps_swipes_00.texture?/detail_a.tex](ascompoundnormal).pc_tex"
+		},
+		"Texture2D_04": {
+			"type": "texture",
+			"value": "[assembly:/_pro/environment/textures/generic/glass/generic_glass_a.texture?/specular_a.tex](ascolormap).pc_tex"
+		},
+		"Texture2D_01": {
+			"type": "texture",
+			"value": "[assembly:/_pro/environment/textures/constants/normalmap.texture?/normal_a.tex](asnormalmap).pc_tex"
+		},
+		"ConstantColorRGB_02_Value": {
+			"type": "color",
+			"value": "ffffff"
+		},
+		"Diff_Albedo_Value": { "type": "float", "value": 0.05 },
+		"ConstantVector1D_04_Value": { "type": "float", "value": 0.8 },
+		"ConstantVector1D_06_Value": { "type": "float", "value": 1.0 },
+		"ConstantVector1D_03_Value": { "type": "float", "value": 0.5 },
+		"ConstantVector1D_01_Value": { "type": "float", "value": 0.005 },
+		"ConstantVector1D_05_Value": { "type": "float", "value": 1.0 },
+		"ConstantVector1D_08_Value": { "type": "float", "value": 0.12 },
+		"ConstantVector1D_07_Value": { "type": "float", "value": 0.3 }
+	}
+}

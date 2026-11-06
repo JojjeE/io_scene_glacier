@@ -1,0 +1,36 @@
+{
+  "factory": "",
+  "blueprint": "",
+  "material": "",
+  "overrides": {
+    "Texture2D_01": { "type": "texture", "value": "diffuse" },
+    "Texture2DNormal_01": {
+      "type": "texture",
+      "value": "normal"
+    },
+    "Texture2D_03": { "type": "texture", "value": "specular" },
+    "Texture2D_04": {
+      "type": "texture",
+      "value": "[assembly:/_pro/environment/textures/constants/color_black.texture?/diffuse_a.tex](ascolormap).pc_tex"
+    },
+    "ConstantColorRGB_02_Value": {
+      "type": "color",
+      "value": "ffffff"
+    },
+    "ShaderLOD_Speccolor": { "type": "color", "value": "383838" },
+    "ConstantColorRGB_01_Value": {
+      "type": "color",
+      "value": "ffffff"
+    },
+    "ConstantVector1D_01_Value": { "type": "float", "value": 0.5 },
+    "ShaderLOD_Distance": { "type": "float", "value": 40.0 },
+    "ShaderLOD_FadeLength": { "type": "float", "value": 5.0 },
+    "ConstantVector1D_06_Value": { "type": "float", "value": 1.0 },
+    "Specular_Multiplier_Value": { "type": "float", "value": 0.0 },
+    "ConstantVector1D_04_Value": { "type": "float", "value": 0.0 },
+    "ConstantVector1D_05_Value": { "type": "float", "value": 1.0 },
+    "ShaderLOD_Gloss": { "type": "float", "value": 0.0 },
+    "ConstantVector1D_07_Value": { "type": "float", "value": 0.0 }
+  }
+}
+

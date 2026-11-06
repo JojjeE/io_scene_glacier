@@ -1,0 +1,41 @@
+{
+	"factory": "",
+	"blueprint": "",
+	"material": "",
+	"overrides": {
+		"Texture2DNormal_01": {
+			"type": "texture",
+			"value": "normal"
+		},
+		"Texture2DCompoundNormal_01": {
+			"type": "texture",
+			"value": "[assembly:/_pro/environment/textures/detailmaps/default.texture?/detail_a.tex](ascompoundnormal).pc_tex"
+		},
+		"Texture2DNormal_02": {
+			"type": "texture",
+			"value": "[assembly:/_pro/effects/textures/detail/fx_detail_broken_glass_01.texture?/normal_c.tex](asnormalmap).pc_tex"
+		},
+		"Texture2D_01": { "type": "texture", "value": "diffuse" },
+		"Texture2D_03": { "type": "texture", "value": "specular" },
+		"ConstantColorRGB_02_Value": {
+			"type": "color",
+			"value": "ffffff"
+		},
+		"ConstantVector1D_06_Value": { "type": "float", "value": 0.0025 },
+		"ConstantVector1D_02_Value": { "type": "float", "value": 0.0 },
+		"ConstantVector1D_10_Value": { "type": "float", "value": 0.0 },
+		"ConstantVector1D_07_Value": { "type": "float", "value": 0.0 },
+		"ConstantVector2D_02_Value": {
+			"type": "vector",
+			"value": [0.0, 0.0]
+		},
+		"ConstantVector1D_01_Value": { "type": "float", "value": 0.5 },
+		"ConstantVector1D_03_Value": { "type": "float", "value": 0.0 },
+		"ConstantVector1D_04_Value": { "type": "float", "value": 0.8 },
+		"ConstantVector1D_05_Value": { "type": "float", "value": 1.0 },
+		"ConstantVector1D_08_Value": { "type": "float", "value": 0.88 },
+		"DisableDistanceFade_Value": { "type": "float", "value": 0.0 },
+		"Specular_Multiplier_Value": { "type": "float", "value": 1.0 },
+		"MirrorBlendMethod_Value": { "type": "float", "value": 0.0 }
+	}
+}
