@@ -198,7 +198,7 @@ def save_prim(
         bre.close()
 
         if export_scene:
-            write_prim_meta(prim_export_path + b".meta.json", materials)
+            write_prim_meta(prim_export_path + b".metadata.json", prim_ioi_path, materials)
 
             write_aloc = False
             # Only export to ALOC if data and collision types are both not set to NONE
@@ -276,13 +276,13 @@ def save_prim(
                 geom_export_path = (
                     export_dir
                     + os.sep.encode()
-                    + geom_ioi_hash.encode()
+                    + collection_name.encode()
                     + b".entity.json"
                 )
                 write_geomentity(
                     collection,
                     geom_export_path,
-                    geom_ioi_hash,
+                    geom_ioi_path,
                     prim_ioi_path,
                     aloc_ioi_path,
                 )
@@ -1189,13 +1189,14 @@ def get_ioi_path_and_hash(ioi_path):
 
 
 def write_geomentity(
-    collection, geom_export_path, geom_ioi_hash, prim_ioi_path, aloc_ioi_path
+    collection, geom_export_path, geom_ioi_path, prim_ioi_path, aloc_ioi_path
 ):
     geomentity_json = {
-        "tempHash": geom_ioi_hash,
-        "tbluHash": "EDIT!!!",
+        "factory": geom_ioi_path,
+        "blueprint": "EDIT!!!",
+        "subType": "template",
         "rootEntity": "2ed3aa8cc1e0b74f",
-        "entities": {
+        "subEntities": {
             "2ed3aa8cc1e0b74f": {
                 "parent": None,
                 "name": "GeomEntity01",
@@ -1211,7 +1212,7 @@ def write_geomentity(
                     },
                     "m_ResourceID": {
                         "type": "ZRuntimeResourceID",
-                        "value": {"resource": prim_ioi_path, "flag": "5F"},
+                        "value": {"resource": prim_ioi_path, "type": "normal"},
                     },
                 },
             }
@@ -1221,40 +1222,39 @@ def write_geomentity(
         "pinConnectionOverrides": [],
         "pinConnectionOverrideDeletes": [],
         "externalScenes": [],
-        "subType": "template",
-        "quickEntityVersion": 3.1,
-        "extraFactoryDependencies": [],
-        "extraBlueprintDependencies": [],
+        "quickEntityVersion": 3.2,
+        "extraFactoryReferences": [],
+        "extraBlueprintReferences": [],
         "comments": [],
     }
     if aloc_ioi_path != "":
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"]["properties"][
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"]["properties"][
             "m_CollisionResourceID"
         ] = {
             "type": "ZRuntimeResourceID",
-            "value": {"resource": aloc_ioi_path, "flag": "5F"},
+            "value": {"resource": aloc_ioi_path, "type": "normal"},
         }
     if int(collection.prim_collection_properties.physics_collision_type) == int(
         aloc_format.PhysicsCollisionType.NONE
     ):
-        geomentity_json["tbluHash"] = "008130A85A690BE8"
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"][
+        geomentity_json["blueprint"] = "[assembly:/templates/geometrytemplatenocoll.template?/geomentity01.entitytemplate].pc_entityblueprint"
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"][
             "factory"
         ] = "[modules:/zgeomentity.class].pc_entitytype"
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"][
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"][
             "blueprint"
         ] = "[modules:/zgeomentity.class].pc_entityblueprint"
     elif int(collection.prim_collection_properties.physics_collision_type) == int(
         aloc_format.PhysicsCollisionType.STATIC
     ):
-        geomentity_json["tbluHash"] = "002E141E1B1C6EFE"
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"][
+        geomentity_json["blueprint"] = "[assembly:/templates/geometrytemplatestaticcoll.template?/geomentity01.entitytemplate].pc_entityblueprint"
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"][
             "factory"
         ] = "[assembly:/templates/aspectdummy.aspect]([modules:/zgeomentity.class].entitytype,[modules:/zstaticphysicsaspect.class].entitytype,[modules:/zcollisionresourceshapeaspect.class].entitytype).pc_entitytype"
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"][
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"][
             "blueprint"
         ] = "[assembly:/templates/aspectdummy.aspect]([modules:/zgeomentity.class].entitytype,[modules:/zstaticphysicsaspect.class].entitytype,[modules:/zcollisionresourceshapeaspect.class].entitytype).pc_entityblueprint"
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"]["properties"][
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"]["properties"][
             "m_bRemovePhysics"
         ] = {
             "type": "bool",
@@ -1263,90 +1263,90 @@ def write_geomentity(
     elif int(collection.prim_collection_properties.physics_collision_type) == int(
         aloc_format.PhysicsCollisionType.RIGIDBODY
     ):
-        geomentity_json["tbluHash"] = "00C7E348A80A6E6E"
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"][
+        geomentity_json["blueprint"] = "[assembly:/templates/geometrytemplaterigidbody.template?/geomentity01.entitytemplate].pc_entityblueprint"
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"][
             "factory"
         ] = "[assembly:/templates/aspectdummy.aspect]([modules:/zgeomentity.class].entitytype,[modules:/zdynamicphysicsaspect.class].entitytype,[modules:/zcollisionresourceshapeaspect.class].entitytype).pc_entitytype"
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"][
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"][
             "blueprint"
         ] = "[assembly:/templates/aspectdummy.aspect]([modules:/zgeomentity.class].entitytype,[modules:/zdynamicphysicsaspect.class].entitytype,[modules:/zcollisionresourceshapeaspect.class].entitytype).pc_entityblueprint"
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"]["properties"][
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"]["properties"][
             "m_bRemovePhysics"
         ] = {
             "type": "bool",
             "value": collection.prim_collection_properties.m_bRemovePhysics,
         }
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"]["properties"][
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"]["properties"][
             "m_bKinematic"
         ] = {
             "type": "bool",
             "value": collection.prim_collection_properties.m_bKinematic,
         }
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"]["properties"][
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"]["properties"][
             "m_bStartSleeping"
         ] = {
             "type": "bool",
             "value": collection.prim_collection_properties.m_bStartSleeping,
         }
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"]["properties"][
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"]["properties"][
             "m_bIgnoreCharacters"
         ] = {
             "type": "bool",
             "value": collection.prim_collection_properties.m_bIgnoreCharacters,
         }
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"]["properties"][
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"]["properties"][
             "m_bEnableCollision"
         ] = {
             "type": "bool",
             "value": collection.prim_collection_properties.m_bEnableCollision,
         }
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"]["properties"][
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"]["properties"][
             "m_bAllowKinematicKinematicContactNotification"
         ] = {
             "type": "bool",
             "value": collection.prim_collection_properties.m_bAllowKinematicKinematicContactNotification,
         }
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"]["properties"]["m_fMass"] = {
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"]["properties"]["m_fMass"] = {
             "type": "float32",
             "value": collection.prim_collection_properties.m_fMass,
         }
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"]["properties"]["m_fFriction"] = {
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"]["properties"]["m_fFriction"] = {
             "type": "float32",
             "value": collection.prim_collection_properties.m_fFriction,
         }
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"]["properties"][
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"]["properties"][
             "m_fRestitution"
         ] = {
             "type": "float32",
             "value": collection.prim_collection_properties.m_fRestitution,
         }
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"]["properties"][
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"]["properties"][
             "m_fLinearDampening"
         ] = {
             "type": "float32",
             "value": collection.prim_collection_properties.m_fLinearDampening,
         }
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"]["properties"][
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"]["properties"][
             "m_fAngularDampening"
         ] = {
             "type": "float32",
             "value": collection.prim_collection_properties.m_fAngularDampening,
         }
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"]["properties"][
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"]["properties"][
             "m_fSleepEnergyThreshold"
         ] = {
             "type": "float32",
             "value": collection.prim_collection_properties.m_fSleepEnergyThreshold,
         }
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"]["properties"]["m_ePriority"] = {
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"]["properties"]["m_ePriority"] = {
             "type": "ECollisionPriority",
             "value": collection.prim_collection_properties.m_ePriority,
         }
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"]["properties"]["m_eCCD"] = {
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"]["properties"]["m_eCCD"] = {
             "type": "ECCDUsage",
             "value": collection.prim_collection_properties.m_eCCD,
         }
-        geomentity_json["entities"]["2ed3aa8cc1e0b74f"]["properties"][
+        geomentity_json["subEntities"]["2ed3aa8cc1e0b74f"]["properties"][
             "m_eCenterOfMass"
         ] = {
             "type": "ECOMUsage",
@@ -1356,24 +1356,17 @@ def write_geomentity(
         json.dump(geomentity_json, f, ensure_ascii=False, indent=4)
 
 
-def write_prim_meta(output_path, materials):
+def write_prim_meta(output_path, prim_ioi_path, materials):
     meta_json = {
-        "hash_value": "000D4DE6CA5229F8",
-        "hash_offset": 8693330,
-        "hash_size": 2147486887,
-        "hash_resource_type": "PRIM",
-        "hash_reference_table_size": 13,
-        "hash_reference_table_dummy": 0,
-        "hash_size_final": 6560,
-        "hash_size_in_memory": 4294967295,
-        "hash_size_in_video_memory": 4294967295,
-        "hash_reference_data": [],
+        "id": prim_ioi_path,
+        "type": "PRIM",
+        "references": [],
     }
     for i in range(len(materials)):
         for m in materials:
             if i == materials[m]["index"]:
-                meta_json["hash_reference_data"].append(
-                    {"hash": materials[m]["ioi_path"], "flag": "5F"}
+                meta_json["references"].append(
+                    {"resource": materials[m]["ioi_path"], "type": "normal"}
                 )
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(meta_json, f, ensure_ascii=False, indent=4)
